@@ -3,6 +3,7 @@ const images = document.querySelectorAll(".thumbnail");
 const mainImageContainer = document.querySelector(".main-image-container");
 
 let currentImageNumber = 0;
+let currentImage;
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -23,8 +24,13 @@ buttons.forEach((button) => {
 
 const displayImage = () => {
   mainImageContainer.innerHTML = "";
-  currentImageSrc = images[currentImageNumber].src;
-  mainImageContainer.innerHTML = `<img src=${currentImageSrc} />`;
+  currentImage = images[currentImageNumber];
+  images.forEach((img, index) =>
+    index === currentImageNumber
+      ? (img.classList.add("img-focus"))
+      : (img.classList.remove("img-focus"))
+  );
+  mainImageContainer.innerHTML = `<img src=${currentImage.src} />`;
 };
 
 images.forEach((image, index) => {
@@ -33,3 +39,5 @@ images.forEach((image, index) => {
     displayImage();
   });
 });
+
+displayImage()
